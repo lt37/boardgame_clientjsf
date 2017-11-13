@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/mainTemplate.xhtml"
+        >
+
+    <ui:define name="bodyContent">
+
+        <h:form id="formulaire">
+
+            <fieldset>
+                <legend>Changement de message</legend>
+                <h:outputLabel for="newMessage">Nouveau Message</h:outputLabel>
+                <p:inputText id="newMessage"
+                             label="Message"
+                             value="#{helloBean.newMessage}"
+                             required="true"
+                             requiredMessage="Veuillez saisir un message"
+                             size="20"
+                             maxlength="60">
+                    <f:validateLength minimum="2" maximum="10" />
+                    <f:ajax event="blur" render="newMessageError" />
+                </p:inputText>
+                <h:message id="newMessageError" for="newMessage"/>
+            </fieldset>
+            <br/>
+            <br/>
+            <p:commandButton ajax="false" value="Change message" action="#{helloBean.updateMessage()}"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <properties>
+        <!-- Le nom court du projet a utiliser pour github -->
+        <projectShortName>boardgame_genericboard</projectShortName>
+        <github.account>lt37</github.account>
+        <!-- utln login for nexus (maven and docker ) repository on lsis -->
+        <lsisnexus.login>lois-tonnet@etud.univ-tln.fr</lsisnexus.login>
+        <!-- the default Main class -->
+        <app.main.class>fr.univtln.m2dapm.boardgame.App</app.main.class>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <primefaces.version>5.0</primefaces.version>
+        <embedded-glassfish.version>3.1.2.2</embedded-glassfish.version>
+        <glassfish.version>4.1</glassfish.version>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+    </properties>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fr.univtln.m2dapm.boardgame</groupId>
+    <artifactId>BoardGame_ClientJSF</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>boardgame_clientjsf</name>
+    <description />
+    <url>https://${github.account}.github.io/boardgame_clientjsf/</url>
+    <inceptionYear>2017</inceptionYear>
+
+    <parent>
+        <groupId>fr.univtln.bruno.pom</groupId>
+        <artifactId>common-pom</artifactId>
+        <version>0.7.30-dev-171</version>
+    </parent>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven2-repository.dev.java.net</id>
+            <name>Java.net Repository for Maven</name>
+            <url>http://download.java.net/maven/glassfish/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-dptinfoutln-public</id>
+            <name>bintray-plugins</name>
+            <url>https://dl.bintray.com/dptinfoutln/public</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <organization>
+        <name>Université de Toulon</name>
+        <url>http://www.univ-tln.fr</url>
+    </organization>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <compilerArguments>
+                        <endorseddirs>${endorsed.dir}</endorseddirs>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.17</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.9</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${endorsed.dir}</outputDirectory>
+                            <silent>true</silent>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>javax</groupId>
+                                    <artifactId>javaee-endorsed-api</artifactId>
+                                    <version>7.0</version>
+                                    <type>jar</type>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.glassfish.embedded</groupId>
+                <artifactId>maven-embedded-glassfish-plugin</artifactId>
+                <version>${embedded-glassfish.version}</version>
+                <configuration>
+                    <app>${project.build.directory}/${project.build.finalName}.war</app>
+                    <name>${project.build.finalName}</name>
+                    <port>7070</port>
+                    <contextRoot>${project.artifactId}</contextRoot>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.glassfish.main.common</groupId>
+                        <artifactId>simple-glassfish-api</artifactId>
+                        <version>${glassfish.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.glassfish.main.extras</groupId>
+                        <artifactId>glassfish-embedded-all</artifactId>
+                        <version>${glassfish.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-dptinfoutln-public</id>
+            <name>bintray</name>
+            <url>https://dl.bintray.com/dptinfoutln/public</url>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>bintray-maxtemmerier-maven-repo</id>
+            <name>maxtemmerier-maven-repo</name>
+            <url>https://api.bintray.com/maven/maxtemmerier/maven-repo/boardgame_genericboard/</url>
+        </repository>
+    </distributionManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>${primefaces.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Only required to run tests in an IntelliJ IDEA that bundles an older version -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
