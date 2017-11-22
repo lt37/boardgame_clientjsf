@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <properties>
         <!-- Le nom court du projet a utiliser pour github -->
-        <projectShortName>boardgame_genericboard</projectShortName>
+        <projectShortName>boardgame_clientjsf</projectShortName>
         <github.account>lt37</github.account>
         <!-- utln login for nexus (maven and docker ) repository on lsis -->
         <lsisnexus.login>lois-tonnet@etud.univ-tln.fr</lsisnexus.login>
@@ -156,7 +156,7 @@
         <repository>
             <id>bintray-maxtemmerier-maven-repo</id>
             <name>maxtemmerier-maven-repo</name>
-            <url>https://api.bintray.com/maven/maxtemmerier/maven-repo/boardgame_genericboard/</url>
+            <url>https://api.bintray.com/maven/maxtemmerier/maven-repo/boardgame_clientjsf/</url>
         </repository>
     </distributionManagement>
 
