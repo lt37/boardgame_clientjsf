@@ -234,7 +234,8 @@
         <dependency>
             <groupId>fr.univtln.m2dapm.boardgame</groupId>
             <artifactId>BoardGame_RESTServer</artifactId>
-            <version>1.0.0-feature-rest-resources-34</version>
+            <version>1.0.0-feature-rest-resources-38</version>
+            <classifier>classes</classifier>
         </dependency>
         <!--<dependency>-->
         <!--<groupId>fr.univtln.m2dapm.boardgame</groupId>-->
