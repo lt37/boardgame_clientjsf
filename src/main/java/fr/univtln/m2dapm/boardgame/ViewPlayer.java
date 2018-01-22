@@ -19,16 +19,16 @@ public class ViewPlayer implements Serializable {
     @ManagedProperty("#{playerService}")
     private PlayerEJB service;
 
-    @PostConstruct
-    public void init() {
-        players = service.createCars(10);
-    }
-
-    public List<Player> getCars() {
-        return players;
-    }
-
-    public void setService(PlayerEJB service) {
-        this.service = service;
-    }
+//    @PostConstruct
+//    public void init() {
+//        players = service.createCars(10);
+//    }
+//
+//    public List<Player> getCars() {
+//        return players;
+//    }
+//
+//    public void setService(PlayerEJB service) {
+//        this.service = service;
+//    }
 }
