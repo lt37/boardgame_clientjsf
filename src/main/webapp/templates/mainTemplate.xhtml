@@ -5,7 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <f:view contentType="text/html" locale="en">
-    <h:head title="Hello JSF">
+    <h:head title="Players">
         <f:facet name="first">
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
             <meta http-equiv="pragma" content="no-cache"/>
@@ -26,22 +26,79 @@
             <div class="ui-panel ui-widget ui-widget-content ui-corner-all"
                  style="margin-bottom: 3px; min-height: 500px;">
 
-                <h:form>
-                    <p:toolbar>
-                        <p:toolbarGroup align="left">
-                            <p:commandButton ajax="false" value="Afficher" icon="ui-icon-home"
-                                             action="welcome.jsf?faces-redirect=true"/>
-                            <p:commandButton ajax="false" value="Changer" icon="ui-icon-home"
-                                             action="changeMessage.jsf?faces-redirect=true"/>
-                        </p:toolbarGroup>
+                <h:form id="formulaire">
 
-                    </p:toolbar>
+                    <fieldset>
+                        <legend>Ajout Joueur</legend>
+                        <h:outputLabel for="newLogin">Login</h:outputLabel>
+                        <p:inputText id="newLogin"
+                                     label="Login"
+                                     value="#{playerView.newLogin}"
+                                     required="true"
+                                     requiredMessage="Veuillez saisir un Login"
+                                     size="20"
+                                     maxlength="60">
+                            <f:validateLength minimum="2" maximum="10" />
+                            <f:ajax event="blur" render="newLoginError" />
+                        </p:inputText>
+                        <h:message id="newLoginError" for="newLogin"/>
+
+                        <h:outputLabel for="newDisplay">Pseudo</h:outputLabel>
+                        <p:inputText id="newDisplay"
+                                     label="Display"
+                                     value="#{playerView.newDisplay}"
+                                     required="true"
+                                     requiredMessage="Veuillez saisir un pseudo"
+                                     size="20"
+                                     maxlength="60">
+                            <f:validateLength minimum="2" maximum="10" />
+                            <f:ajax event="blur" render="newDisplayError" />
+                        </p:inputText>
+                        <h:message id="newMessageError1" for="newDisplay"/>
+
+                        <h:outputLabel for="newMessage2">Email</h:outputLabel>
+                        <p:inputText id="newMessage2"
+                                     label="Message"
+                                     value="#{playerView.newEmail}"
+                                     required="true"
+                                     requiredMessage="Veuillez saisir un email"
+                                     size="20"
+                                     maxlength="60">
+                            <f:validateLength minimum="2" maximum="10" />
+                            <f:ajax event="blur" render="newMessageError2" />
+                        </p:inputText>
+                        <h:message id="newMessageError2" for="newMessage2"/>
+                    </fieldset>
+                    <br/>
+                    <br/>
+                    <p:commandButton ajax="false" value="Add Player" action="#{playerView.addPlayer}"/>
                 </h:form>
 
+
+                <p:dataTable var="player" value="#{playerView.players}">
+                    <p:column headerText="Id">
+                        <h:outputText value="#{player.id}" />
+                    </p:column>
+
+                    <p:column headerText="Login">
+                        <h:outputText value="#{player.loginName}" />
+                    </p:column>
+
+                    <p:column headerText="Display">
+                        <h:outputText value="#{player.displayedName}" />
+                    </p:column>
+
+                    <p:column headerText="Email">
+                        <h:outputText value="#{player.email}" />
+                    </p:column>
+                </p:dataTable>
                 <ui:insert name="bodyContent"/>
             </div>
 
         </div>
+
+
+
     </h:body>
 </f:view>
 </html>

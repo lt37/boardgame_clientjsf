@@ -9,7 +9,7 @@
         <!-- the default Main class -->
         <app.main.class>fr.univtln.m2dapm.boardgame.App</app.main.class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <primefaces.version>5.0</primefaces.version>
+        <primefaces.version>5.3</primefaces.version>
         <embedded-glassfish.version>3.1.2.2</embedded-glassfish.version>
         <glassfish.version>4.1</glassfish.version>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -227,21 +227,17 @@
         <dependency>
             <groupId>fr.univtln.m2dapm.boardgame</groupId>
             <artifactId>BoardGame_BusinessClass</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <version>1.1.0-dev-75</version>
         </dependency>
 
 
         <dependency>
             <groupId>fr.univtln.m2dapm.boardgame</groupId>
             <artifactId>BoardGame_RESTServer</artifactId>
-            <version>1.0.0-feature-rest-resources-38</version>
+            <version>1.0.0-feature-rest-resources-39</version>
             <classifier>classes</classifier>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>fr.univtln.m2dapm.boardgame</groupId>-->
-        <!--<artifactId>BoardGame_RESTServer</artifactId>-->
-        <!--<version>1.0.0-feature-rest-resources-34</version>-->
-        <!--</dependency>-->
+
     </dependencies>
 
 </project>
