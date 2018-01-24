@@ -7,20 +7,19 @@ import fr.univtln.m2dapm.boardgame.restserver.resources.gameinfos.PlayerEJB;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.ejb.EJB;
+import javax.faces.bean.*;
+import javax.inject.Inject;
 
 
 @ManagedBean(name="playerView")
-@ViewScoped
+@SessionScoped
 public class ViewPlayer implements Serializable {
 
-    private List<Player> playersView;
+    @EJB
+    JSFModel jsfModel;
 
-
-    @ManagedProperty("#{playerejb}")
-    private PlayerEJB service;
+    Player player;
 
     private String newEmail;
     private String newLogin;
@@ -28,36 +27,20 @@ public class ViewPlayer implements Serializable {
 
         @PostConstruct
     public void init() {
-        playersView = service.getAllPlayers();
-
+        //playersView = service.getAllPlayers();
+        player = new Player();
     }
 
     public List<Player> getPlayersView() {
-        return playersView;
-    }
-
-    public void refreshPlayer(){
-        playersView = service.getAllPlayers();
-    }
-
-    public void setService(PlayerEJB service) {
-        this.service = service;
+        return jsfModel.getPlayerList();
     }
 
     public void addPlayer(){
-        Player player = new Player();
         player.setEmail(newEmail);
         player.setLoginName(newLogin);
         player.setDisplayedName(newDisplay);
-        this.service.createPlayer(player);
-    }
-
-    public void setPlayersView(List<Player> playersView) {
-        this.playersView = playersView;
-    }
-
-    public PlayerEJB getService() {
-        return service;
+        jsfModel.setPlayer(player);
+        jsfModel.putPlayer();
     }
 
     public String getNewEmail() {
